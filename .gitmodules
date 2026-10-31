@@ -1,3 +1,6 @@
 [submodule "assets/MaaCommonAssets"]
 	path = assets/MaaCommonAssets
 	url = https://github.com/MaaXYZ/MaaCommonAssets
+[submodule "agent/go-service/gdbox-sdk"]
+	path = agent/go-service/gdbox-sdk
+	url = https://github.com/Evan-6/FirmwareManageTool_Rust.git

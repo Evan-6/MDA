@@ -48,5 +48,6 @@
     "mxu_download_step": "Download MXU and extract to install/",
     "mxu_download_url": "https://github.com/MistEO/MXU/releases",
     "description": "MDA build tool: Process build resources and create install directory",
-    "arg_ci": "CI mode: copy files instead of linking"
+    "arg_ci": "CI mode: copy files instead of linking",
+    "wrn_gdbox_library_missing": "gdb.dll missing (run python tools/gdbox.py); hardware input falls back to the built-in controller"
 }

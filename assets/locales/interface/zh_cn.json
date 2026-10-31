@@ -348,5 +348,15 @@
     "task.TribeTower.description": "进入无限之塔界面，完成相关任务",
     "task.TribeTower.label": "🗼无限之塔",
     "task.TribeTowerEnterCommonTower.description": "会一直打直到输掉，不建议日常开启",
-    "welcome.file": "locales/WELCOME.zh_cn.md"
+    "welcome.file": "locales/WELCOME.zh_cn.md",
+    "option.HardwareInput.label": "硬件输入",
+    "option.HardwareInput.description": "用 RP2040 硬件设备发送鼠标与键盘输入；点击固定在游戏窗口上，窗口在副屏也照常落点。选「自动」时检测到设备就启用。",
+    "option.HardwareInput.Auto": "自动",
+    "option.HardwareInput.Auto.description": "检测到 GDBOX 设备就启用，否则用内置控制方式。",
+    "option.HardwareInput.On": "开启",
+    "option.HardwareInput.On.description": "始终优先用硬件输入；设备不可用时记录警告并退回内置控制。",
+    "option.HardwareInput.Off": "关闭",
+    "option.HardwareInput.Off.description": "始终用内置控制方式，忽略已连接的设备。",
+    "setting.HardwareInput.label": "硬件输入",
+    "setting.HardwareInput.description": "RP2040 板子以实体 HID 发送鼠标与键盘。关闭时仍可用环境变量 MDA_GDB_INPUT 临时覆盖。"
 }

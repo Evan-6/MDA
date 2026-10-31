@@ -287,6 +287,15 @@ def build_go_agent(
         print(result.stderr)
 
     print(f"  {Console.ok('->')} {output_path}")
+
+    # gdb.dll 由 LoadLibrary 在 exe 同目錄找，缺了硬體輸入只是退回內建控制。
+    if goos == "windows":
+        library = PROJECT_BASE / "agent" / "go-service" / "gdbox-sdk" / "target" / "release" / "gdb.dll"
+        if library.exists():
+            shutil.copy2(library, agent_dir / "gdb.dll")
+            print(f"  {Console.ok('->')} {agent_dir / 'gdb.dll'}")
+        else:
+            print(f"  {Console.warn(t('wrn_gdbox_library_missing'))}")
     return True
 
 

@@ -118,6 +118,269 @@
         }
     ],
     "task": [],
+    "option": {
+        "HardwareInput": {
+            "type": "select",
+            "label": "$option.HardwareInput.label",
+            "description": "$option.HardwareInput.description",
+            "default_case": "Auto",
+            "cases": [
+                {
+                    "name": "Auto",
+                    "label": "$option.HardwareInput.Auto",
+                    "description": "$option.HardwareInput.Auto.description"
+                },
+                {
+                    "name": "On",
+                    "label": "$option.HardwareInput.On",
+                    "description": "$option.HardwareInput.On.description",
+                    "pipeline_override": {
+                        "AccountNurturingMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "AdviseMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "ArenaMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "CashShopMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "CommonReturnHall": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "CoordinatedOperationsMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "CustomBurstMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "DailyRewardsMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "EquipmentRerollMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "FriendManagementMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "InterceptionMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "LargeEventMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "LuckyBoxOpeningMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "MapPushingFlow": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "OutpostMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "QuotaDisplayMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "RedDotClearMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "ShopMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "SimulationRoomMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "SmallEventMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "SoloRaidMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        },
+                        "TribeTowerMain": {
+                            "attach": {
+                                "hardware_input": "on"
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Off",
+                    "label": "$option.HardwareInput.Off",
+                    "description": "$option.HardwareInput.Off.description",
+                    "pipeline_override": {
+                        "AccountNurturingMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "AdviseMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "ArenaMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "CashShopMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "CommonReturnHall": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "CoordinatedOperationsMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "CustomBurstMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "DailyRewardsMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "EquipmentRerollMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "FriendManagementMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "InterceptionMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "LargeEventMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "LuckyBoxOpeningMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "MapPushingFlow": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "OutpostMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "QuotaDisplayMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "RedDotClearMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "ShopMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "SimulationRoomMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "SmallEventMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "SoloRaidMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        },
+                        "TribeTowerMain": {
+                            "attach": {
+                                "hardware_input": "off"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "global_option": [
+        "HardwareInput"
+    ],
+    "setting": [
+        {
+            "name": "hardwareInput",
+            "label": "$setting.HardwareInput.label",
+            "description": "$setting.HardwareInput.description",
+            "option": [
+                "HardwareInput"
+            ],
+            "default_expand": true
+        }
+    ],
     "import": [
         "tasks/EnterHall.json",
         "tasks/CashShop.json",

@@ -348,5 +348,15 @@
     "task.TribeTower.description": "Enter the tribe tower interface and complete related tasks",
     "task.TribeTower.label": "🗼Tribe Tower",
     "task.TribeTowerEnterCommonTower.description": "Will keep fighting until you lose",
-    "welcome.file": "locales/WELCOME.en_us.md"
+    "welcome.file": "locales/WELCOME.en_us.md",
+    "option.HardwareInput.label": "Hardware input",
+    "option.HardwareInput.description": "Sends mouse and keyboard input through the RP2040 board. Clicks are anchored to the game window, so a window on a second monitor lands correctly. \"Auto\" enables it when a device is present.",
+    "option.HardwareInput.Auto": "Auto",
+    "option.HardwareInput.Auto.description": "Use the GDBOX device when one is detected, otherwise fall back to built-in input.",
+    "option.HardwareInput.On": "On",
+    "option.HardwareInput.On.description": "Always prefer hardware input; falls back to built-in input with a warning when the device is unavailable.",
+    "option.HardwareInput.Off": "Off",
+    "option.HardwareInput.Off.description": "Always use built-in input, ignoring any connected device.",
+    "setting.HardwareInput.label": "Hardware input",
+    "setting.HardwareInput.description": "The RP2040 board sends mouse and keyboard as a physical HID. When disabled, the MDA_GDB_INPUT environment variable can still override it."
 }

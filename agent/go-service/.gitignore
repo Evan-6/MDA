@@ -4,6 +4,8 @@
 *.dll
 *.so
 *.dylib
+# GDBOX SDK 的執行期 DLL 是 vendored 檔案，必須進版控（見 gdbox/README.md）
+!gdbox/gdb.dll
 
 # 测试文件
 *.test

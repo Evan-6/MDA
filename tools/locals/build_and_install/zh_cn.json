@@ -48,5 +48,6 @@
     "mxu_download_step": "下载 MXU 并解压到 install/",
     "mxu_download_url": "https://github.com/MistEO/MXU/releases",
     "description": "MDA 构建工具：处理构建所需资源并创建安装目录",
-    "arg_ci": "CI 模式：复制文件而非链接"
+    "arg_ci": "CI 模式：复制文件而非链接",
+    "wrn_gdbox_library_missing": "缺少 gdb.dll（先跑 python tools/gdbox.py）；硬體輸入會退回內建控制"
 }

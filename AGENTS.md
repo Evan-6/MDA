@@ -73,6 +73,17 @@
     - 审查 Pipeline 时，若发现复杂业务逻辑（状态机、决策、计算、跨节点聚合）硬写在 JSON，优先考虑挪到 Go。
     - 判断一个环节归属时，问“这是‘看到了什么/在哪里’，还是‘看到之后要做什么/怎么算’”：前者给 Pipeline，后者给 Go。
 
+## 硬體輸入（RP2040 / GDBOX SDK）
+
+- 通訊一律走 `FirmwareManageTool_Rust` 的 **GDBOX SDK**，它以 git submodule 釘在 `agent/go-service/gdbox-sdk`；`agent/go-service/go.mod` 的 `replace` 直接指向 submodule 的 `sdk/go`，沒有本地副本（C ABI 1／minor 10）。協議、session／租約／心跳／重連、閉環定位都在 SDK 內。**不要為了方便把協議邏輯寫進 MDA**，SDK 有缺就去 SDK 補、搬 submodule 指標即可；`python tools/gdbox.py` 負責初始化檢查、編 `gdb.dll`、回報 ABI；clone 要 `--recursive`，已 clone 的跑 `git submodule update --init --recursive`。
+- 硬體輸入的套用點是 `gdbinput` 的 **context sink**（`gdbinput/sink.go`）：每個任務第一個 `Node.PipelineNode.Starting` 事件拿到 `*Context` 後呼叫 `HandleEntry`，把 pipeline 內建輸入動作改寫成 `GdbClick` / `GdbSwipe` / `GdbClickKey` / `GdbKeyDown` / `GdbKeyUp`。**pipeline 不需要任何入口動作配合，也不要為此改名或新增節點**——任務入口的 `RuntimeQuotaCheck` 與硬體輸入無關。
+- 改寫只換 `action` 區塊，原 `param` 原封不動往下傳（`target`、`target_offset`、`begin`/`end`/`duration`、`key`），點擊語義仍留在 pipeline。**新增一種內建輸入 `action.type` 時，必須同步更新 `gdbinput/override.go` 的 `inputActionMap`（目前八種：`Click`／`Swipe`／`Scroll`／`LongPress`／`LongPressKey`／`ClickKey`／`KeyDown`／`KeyUp`）**，否則該節點在硬體模式仍走內建輸入。
+- 韌體只有相對滑鼠：SDK 用 `GetPhysicalCursorPos` 閉環逼近目標，行程因此要 per-monitor v2 DPI aware（`gdbinput` 在找視窗前呼叫 SDK 的 `gdb_platform_prepare()`，`gdb_open` 也會做一次），否則影像→螢幕座標會差一個縮放倍率。實體 HID 一定移動真實游標，**無法背景操作**。絕對移動一律帶 anchor：`gdbinput` 傳遊戲視窗的 **client 區**（`ScreenWindowClient(hwnd)`，kind 4），所以視窗在副螢幕或負座標也照樣落點；傳零值等於夾進主螢幕，副螢幕的目標會被拉回主螢幕邊緣。視窗的 client 原點／大小／DPI 一律向 SDK 的 `gdb_window_metrics` 要，不要在 MDA 自己寫 `ClientToScreen`。
+- 呼叫 SDK 的輸入動作一律走新介面：點擊用 `gdb_mouse_click_timed`（帶 `click_hold_ms`，gap 1 ms——SDK 的 0 代表人味分布）、移動用 `gdb_mouse_move_to_on_report`（落點被夾或誤差 > 2 px 會記 `pointer landed off target`），錯誤用 `Device.LastError()` 補上失敗的 opcode。`gdb_open` 之後把 ABI 版本與 `gdb_capabilities()` 寫進日誌。
+- SDK 是 Windows-only：`gdbinput/device_other.go`、`window_other.go` 讓非 Windows 仍能 `go vet ./...`（submodule 內 `sdk/go` 全是 `//go:build windows`，非 Windows 不會載入該 package）；`cmd/gdbprobe` 則是整個目錄 `//go:build windows`。
+- `gdb.dll` 必須落在 `go-service.exe` 同目錄（`tools/install.py` 從 `gdbox-sdk/target/release/gdb.dll` 複製）；缺檔時硬體輸入只是退回內建控制，不會讓任務失敗（`guardSDK` 把載入失敗的 panic 轉成錯誤）。
+- 驗證：`go test ./gdbinput/`（override 覆蓋 ≥400 節點、Click 語義、VK→HID、GDBOX mock 接線）；實機用 `install/gdbprobe.exe`（`move X Y [ms]` 會印落點誤差）。設定與限制見 `docs/gdb-input.md`。
+
 ## 活动主题「当前活动」路由
 
 ### 机制

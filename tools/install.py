@@ -204,7 +204,27 @@ def build_go_agent():
         return False
 
     print(f"  Go agent built successfully: {output_path}")
+
+    # gdb.dll 是執行期用 LoadLibrary 找的，必須與 go-service 同目錄（SDK 只在 Windows 有實作）。
+    if goos == "windows":
+        copy_gdbox_library(agent_dir)
     return True
+
+
+def copy_gdbox_library(agent_dir: Path):
+    """複製 GDBOX SDK 的 gdb.dll 到 agent 目錄"""
+    library = working_dir / "agent" / "go-service" / "gdbox-sdk" / "target" / "release" / "gdb.dll"
+    if not library.exists():
+        print(
+            f"  Warning: {library} is missing; run 'python tools/gdbox.py' to build it"
+            " (hardware input falls back to the built-in controller)"
+        )
+        return
+    shutil.copy2(library, agent_dir / "gdb.dll")
+    print(f"  GDBOX SDK library: {agent_dir / 'gdb.dll'}")
+    # gdbprobe 直接從 install/ 執行，讓它在 exe 同目錄也找得到。
+    if install_path.exists():
+        shutil.copy2(library, install_path / "gdb.dll")
 
 
 def install_agent():
